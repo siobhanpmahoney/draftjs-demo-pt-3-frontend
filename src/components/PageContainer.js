@@ -34,7 +34,10 @@ class PageContainer extends React.Component {
 				editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.displayedNote.content)))
 			})
 		} else {
-			editorState: EditorState.createEmpty()
+			this.setState({
+				noteTitle: "",
+				editorState: EditorState.createEmpty()
+			})
 		}
 	}
 
@@ -44,11 +47,17 @@ class PageContainer extends React.Component {
 			if (typeof displayedNote == "object") {
 				let rawContentFromFile = displayedNote
 				debugger
+				let persistedTitle = displayedNote.title
 				this.setState({
-					editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.displayedNote.content)))
+					editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.displayedNote.content))),
+					noteTitle: persistedTitle
 				})
 			} else {
-				editorState: EditorState.createEmpty()
+				this.setState({
+					noteTitle: "",
+					editorState: EditorState.createEmpty()
+				})
+
 			}
 		}
   }
@@ -70,8 +79,11 @@ class PageContainer extends React.Component {
 			note["content"] = JSON.stringify(note.content)
 			console.log(note)
 			this.props.createNote(note.title, note.content)
-		} else if (!!displayedNote && !!displayedNote.id) {
-			this.props.updateNote(displayedNote.id, this.state.noteTitle, convertToRaw(this.state.editorState))
+		} else {
+			let noteTitle = this.state.noteTitle
+			let note = {title: noteTitle, content: convertToRaw(contentState)}
+			note["content"] = JSON.stringify(note.content)
+			this.props.updateNote(displayedNote.id, note.title, note.content)
 
 		}
 	}
