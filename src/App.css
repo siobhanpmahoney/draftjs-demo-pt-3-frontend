@@ -39,3 +39,20 @@
   font-family: 'Open Sans';
   font-size: 90%;
 }
+
+.submitNote {
+  padding: 0.25em;
+  margin: 0.6em;
+  border-radius: 6px;
+  background: white;
+}
+
+.noteTitle {
+  width: 300px;
+}
+
+input {
+  margin: 1em;
+  padding: 0.5em;
+  length: 100%;
+}
