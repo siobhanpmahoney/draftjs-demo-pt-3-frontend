@@ -1,0 +1,26 @@
+{
+	"name": "draftjs-demo-pt-blog",
+	"version": "1.0.0",
+	"description": "redux",
+	"keywords": [],
+	"main": "src/index.js",
+	"dependencies": {
+		"css-loader": "0.28.11",
+		"draft-js": "latest",
+		"draft-js-image-plugin": "2.0.5",
+		"draft-js-plugins-editor": "2.1.1",
+		"react": "16.3.2",
+		"react-dom": "16.3.2",
+		"react-redux": "5.0.7",
+		"react-scripts": "1.1.4",
+		"redux": "4.0.0",
+		"style-loader": "0.21.0"
+	},
+	"devDependencies": {},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject"
+	}
+}
