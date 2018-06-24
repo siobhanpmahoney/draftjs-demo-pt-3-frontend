@@ -11,14 +11,14 @@ class App extends Component {
 		super(props)
 
 		this.state = {
-			displayedNote: null,
+			displayedNote: "new",
 		}
 	}
 
 	componentDidMount() {
 		this.setState({
 			displayedNote: "new"
-		})
+		}, this.loadPageContainer)
 	}
 
 	selectNote = (event) => {
@@ -32,6 +32,7 @@ class App extends Component {
 			displayedNote: selected
 		})
 	}
+
 
 	render() {
 		return (

@@ -27,13 +27,32 @@ class PageContainer extends React.Component {
 
 	componentDidMount() {
 		let displayedNote = this.props.displayedNote
-		if (displayedNote == "new" ) {
+		if (typeof displayedNote == "object") {
+			let rawContentFromFile = displayedNote
+			debugger
+			this.setState({
+				editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.displayedNote.content)))
+			})
+		} else {
 			editorState: EditorState.createEmpty()
-		} else if (!!displayedNote && !!displayedNote.id) {
-			editorState: EditorState.createWithContent(convertFromRaw(this.props.displayedNote.content))
 		}
-
 	}
+
+	componentDidUpdate(prevProps, prevState) {
+    if (prevProps.displayedNote != this.props.displayedNote) {
+			let displayedNote = this.props.displayedNote
+			if (typeof displayedNote == "object") {
+				let rawContentFromFile = displayedNote
+				debugger
+				this.setState({
+					editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.displayedNote.content)))
+				})
+			} else {
+				editorState: EditorState.createEmpty()
+			}
+		}
+  }
+
 
 	onChange = editorState => {
 		this.setState({
@@ -94,6 +113,11 @@ class PageContainer extends React.Component {
 	};
 
 	render() {
+
+		console.log(this.props)
+		if (!this.props.displayedNote) {
+			return <div>Loading...</div>
+		}
 		return (
 			<div className="editorContainer">
 
